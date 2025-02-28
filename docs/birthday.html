@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Birthday Message</title>
+    <style>
+        html, body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            background: #ff54e8;
+            overflow: hidden;
+        }
+
+        .container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+           
+            padding: 20px;
+            text-align: center;
+        }
+
+        .message {
+            position: relative;
+            height: 350px;
+            width: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .message h1 {
+            font-family: 'Times New Roman', Times, serif;
+            color: white;
+            font-weight: bold;
+            font-size: 50px;
+            text-align: center;
+            background: linear-gradient(45deg, #6da4f8, #403cff, #ec8dff);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: textGradient 5s ease infinite;
+        }
+
+        @keyframes textGradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .hearts {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="message">
+            <h1> İyiki Doğdun ValideParator </h1> 
+        </div>
+      
+    </div>
+    <div class="hearts"></div>
+    <script>
+        const heartContainer = document.querySelector('.hearts');
+
+        function placeHearts() {
+            if (!heartContainer) return;
+
+            const containerWidth = window.innerWidth;
+
+            for (let i = 0; i < 5; i++) {  
+                const heart = document.createElement('i');
+                heart.classList.add('fas', 'fa-heart', 'heart');
+
+                const xPos = Math.random() * containerWidth;
+                const startY = -50;  
+
+                heart.style.position = 'absolute';
+                heart.style.top = `${startY}px`;
+                heart.style.left = `${xPos}px`;
+
+                let scale = Math.random() * 0.7 + 0.6;
+                heart.style.transform = `scale(${scale})`;
+                heart.style.fontSize = Math.random() * 2 + "em";
+                heart.style.color = "#f9272a";
+                heart.style.textShadow = `2px 2px 0px black`;
+
+                heart.style.animation = `fall 4s linear forwards`;
+
+                heartContainer.appendChild(heart);
+
+                setTimeout(() => {
+                    heart.remove();
+                }, 4000);
+            }
+        }
+
+        setInterval(placeHearts, 500);
+    </script>
+
+    <script src="https://kit.fontawesome.com/a609eb5804.js" crossorigin="anonymous"></script>
+</body>
+</html>
